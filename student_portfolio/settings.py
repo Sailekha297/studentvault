@@ -7,6 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'change-this-in-production'
 DEBUG = True
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://studentvault-hoj0.onrender.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
