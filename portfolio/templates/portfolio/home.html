@@ -1,27 +1,14 @@
-
 {% extends 'portfolio/base.html' %}
 
 {% block content %}
-<section class="hero">
-    <h1>Digital Student Portfolio</h1>
-    <p>Store projects and certificates and verify credentials online.</p>
+<section class="card">
+    <h1>StudentVault</h1>
+    <p>Digital Student Portfolio and Certificate Verification</p>
+
+    <h2>Choose Login</h2>
+
+    <p><a href="{% url 'student_login' %}" class="btn">Student Login</a></p>
+
+    <p><a href="{% url 'staff_login' %}" class="btn">Organization Staff Login</a></p>
 </section>
-
-<h2>Students</h2>
-
-<div class="grid">
-    {% for s in students %}
-    <article>
-        <h3>{{ s.name }}</h3>
-        <p>{{ s.register_no }} · {{ s.department }}</p>
-        <p>{{ s.skills }}</p>
-        <a class="btn" href="/student/{{ s.id }}/">View Portfolio</a>
-    </article>
-    {% empty %}
-    <article>
-        <h3>No students yet</h3>
-        <p>Add a student through the REST API or Django admin.</p>
-    </article>
-    {% endfor %}
-</div>
 {% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<section class="card">
+    <h1>Welcome, {{ student.name }}</h1>
+
+    <h2>Personal Information</h2>
+    <p><b>Register Number:</b> {{ student.register_no }}</p>
+    <p><b>Department:</b> {{ student.department }}</p>
+    <p><b>Email:</b> {{ student.email }}</p>
+    <p><b>Skills:</b> {{ student.skills }}</p>
+
+    <h2>My Projects</h2>
+    {% for project in student.projects.all %}
+        <div class="card">
+            <h3>{{ project.title }}</h3>
+            <p>{{ project.description }}</p>
+            <p><b>Technologies:</b> {{ project.technologies }}</p>
+            {% if project.github_link %}
+                <a href="{{ project.github_link }}" target="_blank">GitHub Project</a>
+            {% endif %}
+        </div>
+    {% empty %}
+        <p>No projects available.</p>
+    {% endfor %}
+
+    <h2>My Certificates</h2>
+    {% for certificate in student.certificates.all %}
+        <div class="card">
+            <h3>{{ certificate.certificate_name }}</h3>
+            <p><b>Issuer:</b> {{ certificate.issuer }}</p>
+            <p><b>Issue Date:</b> {{ certificate.issue_date }}</p>
+            <p><b>Verification ID:</b> {{ certificate.verification_id }}</p>
+            <p><b>Status:</b> {{ certificate.status }}</p>
+        </div>
+    {% empty %}
+        <p>No certificates available.</p>
+    {% endfor %}
+
+    <form method="POST" action="{% url 'student_logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn">Logout</button>
+    </form>
+</section>
+{% endblock %}

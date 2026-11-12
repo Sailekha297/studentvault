@@ -1,0 +1,17 @@
+
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<section class="card">
+    <h1>Create Student Login Account</h1>
+    <p>Enter the existing student's register number and create login credentials.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="btn">Create Account</button>
+    </form>
+</section>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<section class="card">
+    <h1>Organization Staff Dashboard</h1>
+
+    <p>Welcome, {{ request.user.username }}.</p>
+
+    <h2>Student Management</h2>
+
+    <p>Create login accounts for existing students.</p>
+
+    <a href="{% url 'create_student_account' %}" class="btn">
+        Create Student Account
+    </a>
+
+    <form method="POST" action="{% url 'staff_logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn">Logout</button>
+    </form>
+</section>
+{% endblock %}

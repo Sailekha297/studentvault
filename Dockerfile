@@ -1,6 +1,9 @@
-FROM python:3.12-slim
+﻿FROM python:3.12-slim
 
 WORKDIR /app
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
@@ -11,4 +14,4 @@ RUN python manage.py collectstatic --noinput
 
 EXPOSE 8000
 
-CMD python manage.py migrate && python manage.py seed_data && python manage.py create_admin && python manage.py runserver 0.0.0.0:8000
+CMD ["gunicorn", "student_portfolio.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "2"]

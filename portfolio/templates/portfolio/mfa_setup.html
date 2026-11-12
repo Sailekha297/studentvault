@@ -1,0 +1,35 @@
+
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<section class="card">
+    <h1>Set Up Two-Factor Authentication</h1>
+
+    <p>Scan this QR code using Google Authenticator or Microsoft Authenticator.</p>
+
+    <img
+        src="data:image/png;base64,{{ qr_image }}"
+        alt="Authenticator QR Code"
+        width="220"
+    >
+
+    <p>Enter the six-digit code displayed in your authenticator app.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input
+            type="text"
+            name="token"
+            placeholder="Enter 6-digit code"
+            inputmode="numeric"
+            autocomplete="one-time-code"
+            required
+        >
+        <button type="submit">Enable MFA</button>
+    </form>
+
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+</section>
+{% endblock %}

@@ -1,0 +1,27 @@
+
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<section class="card">
+    <h1>Two-Factor Authentication</h1>
+
+    <p>Enter the six-digit code from your authenticator app.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input
+            type="text"
+            name="token"
+            placeholder="Enter 6-digit code"
+            inputmode="numeric"
+            autocomplete="one-time-code"
+            required
+        >
+        <button type="submit">Verify Code</button>
+    </form>
+
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+</section>
+{% endblock %}
