@@ -15,7 +15,8 @@
 
   app-init:
     build: .
-    command: sh -c "python manage.py migrate && python manage.py seed_data"
+    user: "0:0"
+    command: sh -c "chown -R 10001:10001 /app/media && python manage.py migrate && python manage.py seed_data"
     environment: &django-env
       DATABASE_URL: postgresql://studentvault:studentvault_dev_password@db:5432/studentvault
       DJANGO_SECRET_KEY: local-da3-development-key-change-before-deployment
